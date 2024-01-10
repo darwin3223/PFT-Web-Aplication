@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	<h:form id="formNav">
+		<div class="contenedor_menu">
+			<div class="menu" id="divNav">
+				<nav>
+				<ul>
+					<li id="#{navbar.idMenuPrincipal}">
+    					<h:panelGroup>
+        					<h:commandLink action="menuPrincipal" actionListener="#{navbar.idMenu('menuPrincipal')}"/>
+    					</h:panelGroup>
+					</li>
+
+					<li id="#{navbar.idMenuPerfil}"><a style="cursor: pointer;">#{navbar.nombreUsuario}</a>
+						<ul>
+							<li>
+								<h:commandLink action="perfilUsuario" value="Mi Perfil" actionListener="#{navbar.idMenu('menuPerfil')}"/>
+							</li>
+						</ul>
+					</li>
+
+					<h:panelGroup rendered="#{navbar.render.analista}">
+						<li id="#{navbar.idMenuUsuarios}"><a style="cursor: pointer;">Usuarios</a>
+							<ul>
+								<li><h:commandLink action="listarUsuarios" value="Lista de Usuarios" actionListener="#{navbar.idMenu('menuUsuarios')}"/></li>
+							</ul>
+						</li>
+
+						<li id="#{navbar.idMenuItrs}"><a style="cursor: pointer;">ITR's</a>
+							<ul>
+								<li><h:commandLink action="listarItrs" value="Lista de ITRs" actionListener="#{navbar.idMenu('menuItrs')}"/></li>
+							</ul>
+						</li>
+						
+						<li id="#{navbar.idMenuGestion}">
+							<a style="cursor: pointer;">Gestión</a>
+							<ul>
+								<li><h:commandLink action="listarEstados" value="Gestión de Estados" actionListener="#{navbar.idMenu('menuGestion')}"/></li>
+							</ul>
+						</li>
+						
+					</h:panelGroup>
+
+					<h:panelGroup rendered="#{navbar.render.analista or navbar.render.tutor}">
+						<li id="#{navbar.idMenuReportes}">
+							<a style="cursor: pointer;">Reportes</a>
+							<ul>
+								<li>
+									<h:commandLink action="reporteReclamos" value="Reclamos" actionListener="#{navbar.idMenu('menuReportes')}"/>
+								</li>
+							</ul>
+						</li>
+					</h:panelGroup>
+
+					<h:panelGroup rendered="#{not navbar.render.tutor}">
+					<li id="#{navbar.idMenuEventos}"><a style="cursor: pointer;">Eventos</a>
+						<ul>
+							<li><h:commandLink action="listarConvocatorias" value="Convocatorias" actionListener="#{navbar.idMenu('menuEventos')}"/></li>
+							<li><h:commandLink action="listarJustificaciones" value="Justificaciones" actionListener="#{navbar.idMenu('menuEventos')}"/></li>
+							<li><h:commandLink action="listarReclamos" value="Reclamos" actionListener="#{navbar.idMenu('menuEventos')}"/></li>
+						</ul>
+					</li>
+					</h:panelGroup>
+				</ul>
+				</nav>
+			</div>
+		</div>
+	</h:form>
+</ui:composition>

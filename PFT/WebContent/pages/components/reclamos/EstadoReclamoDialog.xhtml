@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<p:dialog
+	widgetVar="dialogEstadoReclamo"
+	header="Estado sobre el Reclamo"
+	showEffect="fade"
+	modal="true"
+	responsive="true">
+	<p:outputPanel id="dialogEstadoReclamoContent" class="ui-fluid">
+		<p:outputPanel>
+			<h:panelGroup styleClass="field">
+				<p:outputLabel for="estadoReclamoModificar" value="Estado" />
+				<p:selectOneMenu
+					id="estadoReclamoModificar"
+					styleClass="anchoComboBox"
+					value="#{gestionReclamo.idEstadoCJRSeleccionado}">
+					<f:selectItem itemValue="#{null}" itemLabel="Seleccione un Estado" />
+					<f:selectItems
+						value="#{gestionReclamo.estados}"
+						var="estado"
+						itemValue="#{estado.idEstado}"
+						itemLabel="#{estado.nombre}" />
+					<p:autoUpdate />
+				</p:selectOneMenu>
+			</h:panelGroup>
+		</p:outputPanel>
+	</p:outputPanel>
+	<f:facet name="footer">
+		<p:commandButton
+			value="Guardar"
+			icon="pi pi-check"
+			action="#{gestionReclamo.onUpdateEstado()}">
+			<p:confirm
+				header="Confirmación"
+				message="Deseas guardar las modificaciones?"
+				icon="pi pi-info-circle" />
+		</p:commandButton>
+		<p:commandButton
+			value="Cancelar"
+			icon="pi pi-times"
+			onclick="PF('dialogEstadoReclamo').hide()"
+			class="ui-button-secondary"
+			type="button" />
+			
+		<p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true" width="350">
+            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no ui-button-flat"/>
+            <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" />
+        </p:confirmDialog>
+	</f:facet>
+</p:dialog>
+
+</ui:composition>

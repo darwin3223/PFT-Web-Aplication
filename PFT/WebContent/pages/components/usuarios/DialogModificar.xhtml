@@ -1,0 +1,266 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<p:dialog header="Modificar Usuario" showEffect="fade" modal="true"
+	widgetVar="dialogModificarUsuario" responsive="true">
+	<h:panelGroup id="dialogModificarUsuarioContent" class="ui-fluid">
+	
+		<div class="formgrid grid">
+		    <div class="field col">
+		        <label for="nombreModificar">Nombre</label>
+		        <p:inputText id="nombreModificar" type="text" value="#{gestionListarUsuarios.usuarioNuevo.nombre}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
+		    </div>
+		    <div class="field col">
+		        <label for="apellidoModificar">Apellido</label>
+		        <p:inputText id="apellidoModificar" type="text" value="#{gestionListarUsuarios.usuarioNuevo.apellido}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
+		    </div>
+		</div>
+		<div class="formgrid grid">
+			<div class="field col">
+		        <label for="ciModificar">Documento</label>
+		        <p:inputText id="ciModificar" type="text" value="#{gestionListarUsuarios.usuarioNuevo.documento}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
+		    </div>
+		    <div class="field col">
+		        <label for="fechaNacModificar">Fecha de nacimiento</label>
+		        <p:datePicker class="calendar" id="fechaNacModificar"
+					placeholder="Fecha de nacimiento" monthNavigator="true"
+					yearNavigator="true"
+					styleClass="text-base text-color focus:border-primary w-full "
+					yearRange="#{gestionListarUsuarios.anioParaCalendario()}"
+					value="#{gestionListarUsuarios.usuarioNuevo.fechaNacimiento}">
+				</p:datePicker>
+		    </div>
+		</div>
+		<div class="formgrid grid">
+			<div class="field col">
+		        <label for="emailModificar">Correo</label>
+		        <p:inputText id="emailModificar" type="text" value="#{gestionListarUsuarios.usuarioNuevo.mail}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
+		    </div>
+		    <div class="field col">
+		        <label for="mailInsModificar">Correo Institucional</label>
+		        <p:inputText id="mailInsModificar" type="text" value="#{gestionListarUsuarios.usuarioNuevo.mailInstitucional}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
+		    </div>
+		</div>
+		
+		<div class="formgrid grid">
+			<div class="field col">
+		        <label for="telefonoModificar">Teléfono</label>
+		        <p:inputText id="telefonoModificar" type="text" value="#{gestionListarUsuarios.usuarioNuevo.telefono}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
+		    </div>
+		    <div class="field col">
+		        <label for="generoModificar">Genero</label>
+		        <p:selectOneMenu
+					id="generoModificar"
+					placeholder="Genero"
+					styleClass="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+					value="#{gestionListarUsuarios.usuarioNuevo.genero}">
+					<f:selectItem itemValue="#{null}" itemLabel="Seleccione un Genero" />
+					<f:selectItem itemValue="MASCULINO" itemLabel="Masculino" />
+					<f:selectItem itemValue="FEMENINO" itemLabel="Femenino" />
+					<f:selectItem itemValue="OTRO" itemLabel="Otro" />
+				</p:selectOneMenu>
+		    </div>
+		</div>
+		<div class="formgrid grid">
+			<div class="field col">
+		        <label for="itrModificar">ITR</label>
+		        <p:selectOneMenu id="itrModificar" placeholder="ITR"
+					styleClass="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+					value="#{gestionListarUsuarios.idItrSeleccionado}">
+					<f:selectItem
+							itemValue="#{null}"
+							itemLabel="Seleccione un ITR"/>
+					<f:selectItems
+						value="#{gestionListarUsuarios.cargarListaItr()}"
+						var="itr"
+						itemValue="#{itr.idItr}"
+						itemLabel="#{itr.nombre}"/>
+				</p:selectOneMenu>
+		    </div>
+		    <div class="field col">
+		        <label for="estadoUsuarioModificar">Estado</label>
+				<p:selectOneMenu
+					id="estadoUsuarioModificar"
+					placeholder="Estado de Usuario"
+					styleClass="anchoComboBox"
+					value="#{gestionListarUsuarios.usuarioNuevo.estadoUsuario}">
+					<f:selectItem itemValue="#{null}" itemLabel="Seleccione un Estado" />
+					<f:selectItem itemValue="ACTIVO" itemLabel="Activo" />
+					<f:selectItem itemValue="INACTIVO" itemLabel="Inactivo" />
+				</p:selectOneMenu>
+			</div>
+		</div>
+		<div class="formgrid grid">
+			<div class="field col">
+		        <label for="depModificar">Departamento</label>
+		        <p:selectOneMenu
+					id="depModificar"
+					styleClass="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+					value="#{gestionListarUsuarios.idDepartamentoSeleccionado}"
+					autoWidth="false">
+					<f:selectItem itemValue="#{-1}" itemLabel="Seleccione el Departamento" />
+					<f:selectItems
+						value="#{gestionUsuario.cargarListaDepartamento()}"
+						var="departamento"
+						itemLabel="#{departamento.nombre}"
+						itemValue="#{departamento.idDepartamento}"/>
+					<p:ajax 
+						listener="#{gestionListarUsuarios.cargarListaLocalidadesInput()}"
+						update="panelLocalidadesRegistro"
+						ignoreAutoUpdate="true"/>
+				</p:selectOneMenu>
+		    </div>
+		    <div class="field col">
+		        <label for="panelLocalidadesModificar">Localidad</label>
+		        <h:panelGroup id="panelLocalidadesModificar"> 
+		        <p:selectOneMenu 
+					id="localidadModificar"
+					styleClass="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+					value="#{gestionListarUsuarios.idLocalidadSeleccionada}"
+					autoWidth="false">
+					<f:selectItem itemValue="#{-1}" itemLabel="#{gestionListarUsuarios.textLocalidad}" />
+					<f:selectItems
+						value="#{gestionListarUsuarios.listaLocalidades}"
+						var="localidad"
+						itemLabel="#{localidad.nombre}"
+						itemValue="#{localidad.idLocalidad}"/>
+				</p:selectOneMenu>
+				</h:panelGroup>
+		    </div>
+		</div>
+		<div class="formgrid grid">
+			<div class="field col">
+		        <label for="tipoUsuarioModificar">Tipo de Usuario</label>
+		        <p:selectOneMenu id="tipoUsuarioModificar"
+					placeholder="Tipo de Usuario" styleClass="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+					value="#{gestionListarUsuarios.usuarioNuevo.tipoUsuario}">
+					<f:selectItem itemValue="#{null}" itemLabel="Seleccione un Tipo de usuario"/>
+					<f:selectItem itemValue="ANALISTA" itemLabel="Analista" />
+					<f:selectItem itemValue="ESTUDIANTE" itemLabel="Estudiante" />
+					<f:selectItem itemValue="TUTOR" itemLabel="Tutor" />
+					<p:ajax
+						event="change"
+						listener="#{gestionListarUsuarios.menuItemChanged(gestionListarUsuarios.usuarioNuevo.tipoUsuario)}"
+						update="añoIngresoPanelModificar areaTutorPanelModificar rolTutorPanelModificar" ignoreAutoUpdate="true"/>
+				</p:selectOneMenu>
+		    </div>
+		    <div class="field col">
+		        <label for="verificacionModificar">Verificación</label>
+		        <p:selectOneMenu
+				id="verificacionModificar"
+				placeholder="Verificación de Usuario"
+				styleClass="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+				value="#{gestionListarUsuarios.usuarioNuevo.verificacion}">
+				<f:selectItem itemValue="#{null}" itemLabel="Seleccione la Verificación" />
+				<f:selectItem itemValue="VERIFICADO" itemLabel="Verificado" />
+				<f:selectItem itemValue="NO_VERIFICADO" itemLabel="No verificado" />
+			</p:selectOneMenu>
+		    </div>
+		</div>
+		<div class="formgrid grid">
+			<div class="field col">
+		        <h:panelGroup id="añoIngresoPanelModificar">
+		        <p:outputLabel for="añoIngresoModificar" rendered="#{gestionListarUsuarios.renderInputEstudiante}" styleClass="outputLabelstyle">Año de ingreso</p:outputLabel>
+		        <p:selectOneMenu 
+					id="añoIngresoModificar"
+					rendered="#{gestionListarUsuarios.renderInputEstudiante}"
+					styleClass="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+					placeholder="Seleccione el Año de ingreso"
+					value="#{gestionListarUsuarios.estudianteNuevo.añoIngreso}"
+					filter="true"
+					filterMatchMode="startsWith"
+					autoWidth="false">
+					<f:selectItem itemValue="" itemLabel="Seleccione el Año de ingreso" />
+					<f:selectItems
+						value="#{gestionUsuario.cargarListaAños()}"
+						var="año"
+						itemLabel="#{año}"
+						itemValue="#{año}"/>
+					<p:autoUpdate/>
+				</p:selectOneMenu>
+				
+				<h:panelGroup id="areaTutorPanelModificar"> 
+				<p:outputLabel for="areaTutorModificar" rendered="#{gestionListarUsuarios.renderInputTutor}" styleClass="outputLabelstyle">Area de trabajo</p:outputLabel>
+				<p:selectOneMenu 
+					id="areaTutorModificar"
+					placeholder="Area de trabajo"
+					styleClass="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+					value="#{gestionListarUsuarios.tutorNuevo.area}"
+					rendered="#{gestionListarUsuarios.renderInputTutor}">
+					<f:selectItem itemValue="#{null}" itemLabel="Seleccione un Area" />
+					<f:selectItem itemValue="Programación" itemLabel="Programacion" />
+					<f:selectItem itemValue="Base de datos" itemLabel="Base de datos" />
+					<f:selectItem itemValue="Testing" itemLabel="Testing" />
+					<f:selectItem itemValue="Infraestructura" itemLabel="Infraestructura" />
+					
+				</p:selectOneMenu>
+				</h:panelGroup>
+				</h:panelGroup>
+		    </div>
+		    <div class="field col">
+		        <h:panelGroup id="rolTutorPanelModificar"> 
+		        <p:outputLabel for="rolTutorModificar" rendered="#{gestionListarUsuarios.renderInputTutor}" styleClass="outputLabelstyle">Rol del Tutor</p:outputLabel>
+				<p:selectOneMenu
+					id="rolTutorModificar"
+					placeholder="Rol en el Area"
+					styleClass="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+					value="#{gestionListarUsuarios.tutorNuevo.rolTutor}"
+					rendered="#{gestionListarUsuarios.renderInputTutor}">
+					<f:selectItem itemValue="#{null}" itemLabel="Seleccione un Rol" />
+					<f:selectItem itemValue="ENCARGADO" itemLabel="Encargado" />
+					<f:selectItem itemValue="TUTOR" itemLabel="Tutor" />
+					<p:autoUpdate/>
+				</p:selectOneMenu>
+				</h:panelGroup>
+		    </div>
+		</div>
+		
+		<!--
+		
+		<h:panelGroup>
+			<p:outputLabel>Verificación:</p:outputLabel>
+			<p:selectOneMenu
+				id="verificacion"
+				placeholder="Verificación de Usuario"
+				styleClass="anchoComboBox"
+				value="#{gestionListarUsuarios.usuarioNuevo.verificacion}">
+				<f:selectItem itemValue="#{null}" itemLabel="Seleccione la Verificación" />
+				<f:selectItem itemValue="VERIFICADO" itemLabel="Verificado" />
+				<f:selectItem itemValue="NO_VERIFICADO" itemLabel="No verificado" />
+			</p:selectOneMenu>
+		</h:panelGroup>
+		-->
+
+	</h:panelGroup>
+
+	<f:facet name="footer">
+		<p:commandButton
+			value="Guardar"
+			icon="pi pi-check"
+			action="#{gestionListarUsuarios.modificarUsuario()}"
+			update="dialogModificarUsuarioContent :seccion_lista_usuarios:growl :seccion_lista_usuarios:usuarios"
+			process="dialogModificarUsuarioContent @this">
+			<p:confirm
+				header="Confirmación"
+				message="Deseas guardar las modificaciones?"
+				icon="pi pi-info-circle" />
+		</p:commandButton>
+		<p:commandButton
+			value="Cancelar"
+			icon="pi pi-times"
+			onclick="PF('dialogModificarUsuario').hide()"
+			action="#{gestionListarUsuarios.limpiarCampos()}"
+			class="ui-button-secondary"
+			type="button" />
+			
+		<p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true" width="350">
+            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no ui-button-flat"/>
+            <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" />
+        </p:confirmDialog>
+	</f:facet>
+</p:dialog>
+</ui:composition>

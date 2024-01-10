@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<f:metadata>
+		<f:viewAction action="#{gestionReclamo.verBotonesReclamos()}"/>
+	</f:metadata> 
+
+<p:dataTable
+	id="reclamoDatatable"
+	value="#{gestionReclamo.listaReclamos}"
+	var="reclamo"
+	widgetVar="lista_reclamos_registrados"
+	emptyMessage="No se encontraron Reclamos"
+	globalFilterFunction="#{gestionReclamo.globalFilterFunctionReclamo}"
+	editable="true"
+	rowKey="#{reclamo.idReclamo}"
+	class="my-table"
+	scrollable="true"
+	scrollHeight="800"
+	border="1">
+
+	<f:facet name="header">
+		<div class="flex justify-content-end" style="display:flex;">
+			<p:inputText
+				id="globalFilter"
+				onkeyup="PF('lista_reclamos_registrados').filter()"
+				style="width:300px"
+				placeholder="Buscar Reclamo" />
+			<p:selectOneMenu
+				id="estadoFilter"
+				value="#{gestionReclamo.idEstadoFilter}"
+				style="margin-left:30px;"
+				onchange="PF('lista_reclamos_registrados').filter()">
+				<f:selectItem itemValue="#{null}" itemLabel="Todos" />
+				<f:selectItems
+					value="#{gestionReclamo.estados}"
+					var="estado"
+					itemValue="#{estado.idEstado}"
+					itemLabel="#{estado.nombre}" />
+				<p:ajax listener="#{gestionReclamo.refreshListaReclamos()}" />
+			</p:selectOneMenu>
+		</div>
+	</f:facet>
+
+	<p:column headerText="Id" sortBy="#{reclamo.idReclamo}" rendered="#{gestionReclamo.render.analista}" style="width:40px;">
+		<h:outputText value="#{reclamo.idReclamo}" />
+	</p:column>
+	<p:column headerText="Titulo" sortBy="#{reclamo.titulo}">
+		<h:outputText value="#{reclamo.titulo}" />
+	</p:column>
+	<!-- Me parece que con el documento del estudiante ya es suficiente -->
+	<!-- <p:column headerText="Estudiante">
+		<h:outputText value="#{reclamo.estudiante.nombre} #{reclamo.estudiante.apellido}" /> 
+	</p:column> -->
+	<p:column headerText="Evento">
+		<p:chip>
+			<h:outputText value="#{reclamo.evento.titulo}" />
+		</p:chip>
+	</p:column>
+	<p:column headerText="Estudiante" rendered="#{not gestionReclamo.render.estudiante}">
+		<p:chip>
+			<h:outputText value="#{reclamo.estudiante.documento}" />
+		</p:chip>
+	</p:column>
+	<p:column headerText="Tipo de Evento">
+		<h:outputText value="#{reclamo.evento.tipoEvento.nombre}" />
+	</p:column>
+	<p:column headerText="Estado">
+		<p:chip>
+			<h:outputText value="#{reclamo.estado.nombre}" />
+		</p:chip>
+	</p:column>
+	<p:column headerText="Acciones" exportable="false">
+		<p:commandButton
+			title="Ver Detalles"
+			icon="pi pi-eye"
+			oncomplete="PF('dialogDetailReclamo').show()"
+			action="#{gestionReclamo.seleccionarReclamo(reclamo)}"
+			styleClass="rounded-button ui-button-outlined"
+			update=":dialogs:dialogDetailReclamoContent"
+			style="margin-right: 5px;"/>
+		<p:commandButton
+			title="Responder Reclamo"
+			icon="pi pi-send"
+			oncomplete="PF('dialogAccionReclamo').show()"
+			action="#{gestionReclamo.seleccionarReclamo(reclamo)}"
+			styleClass="rounded-button ui-button-outlined"
+			update=":dialogs:dialogAccionReclamoContent"
+			style="margin-right: 5px;"
+			rendered="#{gestionReclamo.render.analista}" />
+		<p:commandButton
+			title="Actualizar Estado"
+			icon="pi pi-pencil"
+			oncomplete="PF('dialogEstadoReclamo').show()"
+			action="#{gestionReclamo.seleccionarReclamo(reclamo)}"
+			styleClass="rounded-button ui-button-outlined"
+			update=":dialogs:dialogEstadoReclamoContent"
+			style="margin-right: 5px;"
+			rendered="#{gestionReclamo.render.analista}"/>
+		<p:commandButton
+			icon="pi pi-pencil"
+			update=":dialogs:dialogModificarReclamoContent"
+			oncomplete="PF('dialogModificarReclamo').show()"
+			action="#{gestionReclamo.seleccionarReclamo(reclamo)}"
+			styleClass="rounded-button ui-button-outlined"
+			rendered="#{gestionReclamo.render.estudiante}"
+			style="margin-right: 5px;" />
+		<p:commandButton
+			icon="pi pi-trash"
+			update=":form:growlMessage :form:reclamoDatatable"
+			process="@this"
+			action="#{gestionReclamo.eliminarReclamo(reclamo.idReclamo)}"
+			styleClass="rounded-button ui-button-danger ui-button-outlined"
+			rendered="#{gestionReclamo.render.estudiante}">
+			<p:confirm
+				icon="pi pi-info-circle"
+				header="Confirmación"
+				message="Deseas desactivar el Reclamo: #{reclamo.titulo}?" />
+		</p:commandButton>
+	</p:column>
+</p:dataTable>
+
+</ui:composition>

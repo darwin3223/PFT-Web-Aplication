@@ -1,0 +1,66 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions">
+
+	<p:dialog header="Detalle Justificación"
+		widgetVar="dialogDetailJustificacion" modal="true" showEffect="fade"
+		hideEffect="fade" resizable="false">
+		<h:panelGroup id="dialogDetailJustificacionContent" styleClass="font">
+			
+			<div class="card">
+    			<div class="field grid">
+	       			<div class="field col">
+	            		<label for="estudiante">Estudiante</label>
+	            		<div>
+	            			<input id="estudiante" type="text" value="#{gestionJustificacion.justificacion.estudiante.documento}" disabled="disabled" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
+	        			</div>
+	        		</div>
+	        		<div class="field col">
+	            		<label for="evento">Evento</label>
+	            		<div>
+	            			<input id="evento" type="text" value="#{gestionJustificacion.justificacion.evento.titulo}" disabled="disabled" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
+	        			</div>
+	        		</div> 
+    			</div>
+    			<div class="field grid">
+	       			<div class="field col">
+	            		<label for="estado">Estado</label>
+	            		<div>
+	            			<input id="estado" type="text" value="#{gestionJustificacion.justificacion.estado.nombre}" disabled="disabled" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
+	        			</div>
+	        		</div>
+	        		<div class="field col">
+	            		<label for="fecha">Fecha</label>
+	            		<div>
+	            			<input id="fecha" type="text" value="#{of:formatDate(gestionJustificacion.justificacion.fechaHora, 'dd/MM/yyyy HH:mm')}" disabled="disabled" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
+	        			</div>
+	        		</div>
+    			</div>
+    			<div class="field col">
+	            	<label for="detalle">Detalle</label>
+            		<div>
+            			<p:inputTextarea id="detalle" type="text" value="#{gestionJustificacion.justificacion.detalle}" disabled="true" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
+        			</div>
+	        	</div>
+			</div>
+		</h:panelGroup> 
+	</p:dialog>
+	<style>
+	.font {
+		font-size: 20px;
+	}
+	
+	.text1 {
+		font-weight: 900;
+	}
+	body .ui-state-disabled {
+		opacity: 1 !important; 
+	}
+</style>
+
+</ui:composition>

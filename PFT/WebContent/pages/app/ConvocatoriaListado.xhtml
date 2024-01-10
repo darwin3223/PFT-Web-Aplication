@@ -1,0 +1,22 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/template.xhtml">
+
+<ui:define name="main_content">
+	<div class="main" style="z-index: 1;">
+		<h:form styleClass="seccion_lista_usuarios" id="form">
+			<p:growl id="growlMessage" showDetail="true" style="z-index: 1;"> <p:autoUpdate></p:autoUpdate> </p:growl>
+			<h2>Lista de Convocatorias</h2><br /><br />
+			<ui:include src="/pages/components/convocatorias/ConvocatoriaDataTable.xhtml" />
+		</h:form>
+		<h:form id="dialogs">
+			<ui:include src="/pages/components/reclamos/ReclamoDialogRegistrar.xhtml"/>
+			<ui:include src="/pages/components/justificaciones/JustificacionDialogRegistrar.xhtml"/>
+		</h:form>
+	</div>
+</ui:define>
+</ui:composition>

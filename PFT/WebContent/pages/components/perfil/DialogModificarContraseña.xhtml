@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<p:dialog header="Modificar contraseña" showEffect="fade" modal="true"
+	widgetVar="dialogModificarContraseña" responsive="true">
+	<p:growl id="growl" showDetail="true" style="z-index: 1;"> <p:autoUpdate></p:autoUpdate> </p:growl>
+	<p:outputPanel id="dialogModificarContraseñaContent" class="ui-fluid">
+		<p:outputPanel>
+			 <div class="field">
+			  <p:outputLabel value="Contraseña nueva" for="pwd1"/>
+			  <p:password id="pwd1" value="#{gestionPerfil.passwordNueva}" match="pwd2" label="Contraseña" toggleMask="true" validatorMessage="Error, Las contraseñas no coinciden"/>
+			  
+			  </div>
+			  <div class="field">
+			  <p:outputLabel value="Repetir contraseña" for="pwd2"/>
+			  <p:password id="pwd2" value="#{gestionPerfil.passwordNueva}" toggleMask="true" />
+			  
+			  </div>
+		</p:outputPanel>
+	</p:outputPanel>
+
+	<f:facet name="footer">
+		<p:commandButton value="Guardar" icon="pi pi-check"
+			action="#{gestionPerfil.modificarContraseña()}"
+			update="dialogModificarContraseñaContent">
+			<p:confirm
+				header="Confirmación"
+				message="Guardar contraseña nueva?"
+				icon="pi pi-info-circle" />
+		</p:commandButton>
+		<p:commandButton value="Cancelar" icon="pi pi-times"
+			onclick="PF('dialogModificarContraseña').hide()"
+			action="#{gestionPerfil.limpiarCampos()}" class="ui-button-secondary"
+			type="button" />
+			
+		<p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true" width="350">
+            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no ui-button-flat"/>
+            <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" />
+        </p:confirmDialog>
+	</f:facet>
+</p:dialog>
+
+</ui:composition>

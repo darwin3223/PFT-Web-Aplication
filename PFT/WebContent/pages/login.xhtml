@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<f:metadata>
+		<f:viewAction action="#{initDatabase.comprobarDatabase()}"/>
+	</f:metadata>
+	
+<h:head>
+	<h:outputStylesheet library="css" name="hojaDeEstilos_Login_Registro.css"/>
+	<title>Inicio de sesion</title>
+</h:head>
+<h:body>
+	<div class="main">
+		<div class="contenedor__todo">
+			<div class="caja__trasera" style="justify-content: flex-start;">
+				<div class="caja__trasera-register">
+					<h:form>
+						<h3>¿No tenes una cuenta?</h3>
+						<p>Regístrate para iniciar sesión</p>
+						<p:button id="btn__registrarse" class="button" value="Regístrarse" outcome="registro" />
+					</h:form>
+				</div>
+			</div>
+
+			<div class="contenedor__login_register contenedor__login">
+				<h:form id="formulario__login" class="formulario__login">
+					<h2>Iniciar Sesión</h2>
+					<p:inputText class="campo" id="nombreUsuario"
+						placeholder="Nombre de Usuario"
+						value="#{gestionAutenticacion.nombreUsuarioLogin}"
+						required="true" />
+					<p:password  id="contrasenia" 
+						style="margin-top: 20px; margin-bottom: 20px;"
+						placeholder="Contraseña"
+						autocomplete="true"
+						value="#{gestionAutenticacion.contraseniaLogin}"
+						required="true" toggleMask="true"/>
+					<h:link value="¿Olvidaste tu contraseña?" outcome="lostPassword" style="margin-right: 20px;"/>
+					<p:commandButton class="button" value="Entrar"
+						action="#{gestionAutenticacion.login()}"
+						update="formulario__login"/>
+				</h:form>
+			</div>
+		</div>
+	</div>
+
+</h:body>
+</html>

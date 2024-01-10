@@ -1,0 +1,88 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions">
+
+<p:dialog
+	widgetVar="dialogDetailReclamo"
+	header="Ficha del Reclamo"
+	showEffect="fade"
+	modal="true"
+	responsive="true"
+	resizable="false"
+	blockScroll="true">
+	
+	<h:panelGroup id="dialogDetailReclamoContent" styleClass="font">
+		
+			<div class="card">
+				<div class="field grid">
+					<div class="field col">
+	            		<label for="tituloReclamo">Titulo</label>
+	            		<div>
+	            			<p:inputTextarea id="tituloReclamo" type="text" styleClass="ui-inputfield" value="#{gestionReclamo.reclamoSeleccionado.titulo}" disabled="true" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
+	        			</div>
+	        		</div>
+	       			<div class="field col">
+	            		<label for="tipo">Tipo de reclamo</label>
+	            		<div>
+	            			<input id="tipo" type="text" value="#{gestionReclamo.reclamoSeleccionado.tipoReclamo.nombre}" disabled="disabled" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
+	        			</div>
+	        		</div>
+    			</div>
+    			
+    			<div class="field grid">
+	       			<div class="field col">
+	            		<label for="estudiante">Estudiante</label>
+	            		<div>
+	            			<input id="estudiante" type="text" value="#{gestionReclamo.reclamoSeleccionado.estudiante.documento}" disabled="disabled" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
+	        			</div>
+	        		</div>
+	        		<div class="field col">
+	            		<label for="evento">Evento</label>
+	            		<div>
+	            			<input id="evento" type="text" value="#{gestionReclamo.reclamoSeleccionado.evento.titulo}" disabled="disabled" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
+	        			</div>
+	        		</div>
+    			</div>
+    			
+    			<div class="field grid">
+	       			<div class="field col">
+	            		<label for="estado">Estado</label>
+	            		<div>
+	            			<input id="estado" type="text" value="#{gestionReclamo.reclamoSeleccionado.estado.nombre}" disabled="disabled" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
+	        			</div>
+	        		</div>
+	        		<div class="field col">
+	            		<label for="fecha">Fecha</label>
+	            		<div>
+	            			<input id="fecha" type="text" value="#{of:formatDate(gestionReclamo.reclamoSeleccionado.fecha_Hora, 'dd/MM/yyyy HH:mm')}" disabled="disabled" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
+	        			</div>
+	        		</div>
+    			</div>
+    			
+    			<div class="field col">
+	            	<label for="detalleReclamo">Detalle</label>
+            		<div>
+            			<p:inputTextarea id="detalleReclamo" type="text" value="#{gestionReclamo.reclamoSeleccionado.detalle}" disabled="true" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
+        			</div>
+	        	</div>
+			</div>
+		</h:panelGroup> 
+</p:dialog>
+<style>
+	.font {
+		font-size: 20px;
+	}
+	
+	.text1 {
+		font-weight: 900;
+	}
+	body .ui-state-disabled {
+		opacity: 1 !important; 
+	}
+</style>
+</ui:composition>

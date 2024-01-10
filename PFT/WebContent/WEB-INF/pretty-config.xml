@@ -1,0 +1,85 @@
+<pretty-config xmlns="http://ocpsoft.org/schema/rewrite-config-prettyfaces"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://ocpsoft.org/schema/rewrite-config-prettyfaces
+                   http://ocpsoft.org/xml/ns/prettyfaces/rewrite-config-prettyfaces.xsd">
+
+
+	<!-- Mapeo para la ruta de acceso denegado -->
+    <url-mapping id="accesoDenegado">
+        <pattern value="/access-denied" />
+        <view-id value="/pages/acceso_denegado.jsf" />
+    </url-mapping>
+    
+    <!-- Mapeo para la ruta de acceso denegado -->
+    <url-mapping id="accesoDenegado">
+        <pattern value="/restore-password" />
+        <view-id value="/pages/lostPassword.jsf" />
+    </url-mapping>
+    
+    <!-- Mapeo para la ruta de registro -->
+    <url-mapping id="register">
+        <pattern value="/registro" />
+        <view-id value="/pages/registro.jsf" />
+    </url-mapping>
+
+    <!-- Mapeo para la ruta de login -->
+    <url-mapping id="login">
+        <pattern value="/login" />
+        <view-id value="/pages/login.jsf" />
+    </url-mapping>
+
+    <!-- Mapeo para la ruta de perfilUsuario -->
+    <url-mapping id="perfilUsuario">
+        <pattern value="/app/profile" />
+        <view-id value="/pages/app/PerfilUsuario.jsf" />
+    </url-mapping>
+
+    <!-- Mapeo para la ruta de menuPrincipal -->
+    <url-mapping id="menuPrincipal">
+        <pattern value="/app/welcome" />
+        <view-id value="/pages/app/Welcome.jsf" />
+    </url-mapping>
+
+    <!-- Mapeo para la ruta de listarJustificaciones -->
+    <url-mapping id="listarJustificaciones">
+        <pattern value="/app/justificaciones" />
+        <view-id value="/pages/app/JustificacionListado.jsf" />
+    </url-mapping>
+
+    <!-- Mapeo para la ruta de listarConvocatorias -->
+    <url-mapping id="listarConvocatorias">
+        <pattern value="/app/convocatorias" />
+        <view-id value="/pages/app/ConvocatoriaListado.jsf" />
+    </url-mapping>
+
+    <!-- Mapeo para la ruta de listarReclamos -->
+    <url-mapping id="listarReclamos">
+        <pattern value="/app/reclamos" />
+        <view-id value="/pages/app/ListadoReclamo.jsf" />
+    </url-mapping>
+
+    <!-- Mapeo para la ruta de listarUsuarios -->
+    <url-mapping id="listarUsuarios">
+        <pattern value="/app/usuarios" />
+        <view-id value="/pages/admin/UsuarioListado.jsf" />
+    </url-mapping>
+
+    <!-- Mapeo para la ruta de listarItrs -->
+    <url-mapping id="listarItrs">
+        <pattern value="/app/itrs" />
+        <view-id value="/pages/admin/ListadoItrs.jsf" />
+    </url-mapping>
+
+	<!-- Mapeo para la ruta de listarEstados -->
+    <url-mapping id="listarEstados">
+        <pattern value="/app/estados" />
+        <view-id value="/pages/admin/ListadoEstados.jsf" />
+    </url-mapping>
+    
+    <!-- Mapeo para la ruta de reporteReclamos -->
+    <url-mapping id="ReportesReclamos">
+        <pattern value="/app/reportes/reclamos" />
+        <view-id value="/pages/admin/reportes/ReporteReclamos.jsf" />
+    </url-mapping>
+
+</pretty-config>

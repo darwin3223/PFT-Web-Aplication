@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<div class="header_general" style="z-index: 2;">
+	<div class="header_superior">
+		<div class="logo">
+			<h:graphicImage name="img/06-isologotipo-para-fondo-blanco.png" />
+		</div>
+		<div class="options_cog" style="z-index: 1;">
+			<h:form>
+				<p:menuButton icon="pi pi-cog">
+					<p:menuitem value="Cerrar Sesión"
+						action="#{gestionAutenticacion.logout()}" icon="pi pi-sign-out" />
+				</p:menuButton>
+			</h:form>
+		</div>
+	</div>
+	<ui:include src="/pages/components/NavigationBar.xhtml" />
+</div>
+
+</ui:composition>

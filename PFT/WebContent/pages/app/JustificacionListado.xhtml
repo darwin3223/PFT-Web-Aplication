@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/template.xhtml">
+
+<ui:define name="main_content">
+	<div class="main" style="z-index: 1;">
+		<h:form id="form" styleClass="seccion_lista_usuarios">
+			<p:growl id="growlMessage" showDetail="true" style="z-index: 1;">
+				<p:autoUpdate />
+			</p:growl>
+			<h2>Lista de Justificaciones</h2>
+			<br />
+			<br />
+			<ui:include src="/pages/components/justificaciones/JustificacionDataTable.xhtml" />
+			<p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true" width="350">
+				<p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no ui-button-flat" />
+				<p:commandButton value="Si" type="button" update=":seccion_lista_usuarios:growlMessage :seccion_lista_usuarios:itr"	styleClass="ui-confirmdialog-yes" />
+			</p:confirmDialog>
+		</h:form>
+		<h:form id="dialogs">
+			<ui:include src="/pages/components/justificaciones/JustificacionDialogRegistrar.xhtml"/>
+			<ui:include src="/pages/components/justificaciones/JustificacionDialogModificar.xhtml"/>
+			<ui:include src="/pages/components/justificaciones/JustificacionDialogDetails.xhtml"/>
+			<ui:include src="/pages/components/justificaciones/AccionJustificacionDialog.xhtml"/>
+			<ui:include src="/pages/components/justificaciones/EstadoJustificacionDialog.xhtml"/>
+		</h:form>
+	</div>
+</ui:define>
+</ui:composition>

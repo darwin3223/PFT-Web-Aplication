@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<p:dataTable
+	id="itrDatatable"
+	value="#{gestionItr.listaItrs}"
+	var="itr"
+	widgetVar="lista_itrs_registrados"
+	emptyMessage="No se encontraron Itr's"
+	globalFilterFunction="#{gestionItr.globalFilterFunctionItr}"
+	editable="true"
+	rowKey="#{itr.idItr}"
+	class="my-table"
+	scrollable="true"
+	scrollHeight="800"
+	border="1">
+
+	<f:facet name="header">
+		<div class="flex justify-content-end" style="display:flex; justify-content: space-between;">
+			<p:inputText 
+				id="globalFilter"
+				onkeyup="PF('lista_itrs_registrados').filter()"
+				style="width:300px"
+				placeholder="Buscar itr" />
+			<p:selectOneMenu
+				id="estadoFilter"
+				value="#{gestionItr.estadoFilter}"
+				style="margin-left:30px;"
+				onchange="PF('lista_itrs_registrados').filter()">
+				<f:selectItem itemValue="#{null}" itemLabel="Todos" />
+				<f:selectItem itemValue="ACTIVADO" itemLabel="Activados" />
+				<f:selectItem itemValue="DESACTIVADO" itemLabel="Desactivados" />
+				<p:ajax listener="#{gestionItr.refreshListaItr(gestionItr.estadoFilter)}"></p:ajax>
+			</p:selectOneMenu>
+			<p:commandButton
+				title="Actualizar"
+				icon="pi pi-refresh"
+				action="#{gestionItr.onRefresh()}"
+				style="margin-left:auto;"
+				styleClass="rounded-button ui-button-outlined"/>
+			<p:commandButton
+				icon="pi pi-plus"
+				value="Nuevo"
+				oncomplete="PF('dialogRegistrarItr').show()"
+				styleClass="ui-button-outlined ui-button-success"
+				style="margin-left:30px; margin-right: .5rem;" />
+			<p:autoUpdate />
+		</div>
+	</f:facet>
+
+	<!-- <p:column headerText="Id" sortBy="#{itr.idItr}" style="width:40px;">
+		<h:outputText value="#{itr.idItr}"/>
+	</p:column> -->
+	<p:column headerText="Nombre" sortBy="#{itr.nombre}">
+		<h:outputText value="#{itr.nombre}"/>
+	</p:column>
+	<p:column headerText="Departamento">
+		<p:chip>
+			<h:outputText value="#{itr.localidad.departamento.nombre}"/>
+		</p:chip>
+	</p:column>
+	<p:column headerText="Localidad">
+		<p:chip>
+			<h:outputText value="#{itr.localidad.nombre}"/>
+		</p:chip>
+	</p:column>
+	<p:column headerText="Estado">
+		<p:tag severity="#{gestionItr.getTagSeverity(itr.estado)}" value="#{itr.estado.nombre}" />
+	</p:column>
+	<p:column exportable="false" style="width:85px;">
+		<p:commandButton
+			icon="pi pi-pencil"
+			oncomplete="PF('dialogModificarItr').show()"
+			update=":dialogs:dialogModificarItrContent"
+			action="#{gestionItr.onSelectItr(itr)}"
+			styleClass="rounded-button ui-button-outlined"
+			style="margin-right: 5px;">
+		</p:commandButton>
+		<p:commandButton
+			icon="pi pi-trash"
+			action="#{gestionItr.onDelete(itr.idItr)}"
+			styleClass="rounded-button ui-button-danger ui-button-outlined"
+			disabled="#{itr.estado == 'DESACTIVADO'}">
+			<p:confirm
+				icon="pi pi-info-circle"
+				header="Confirmación"
+				message="Deseas desactivar el itr: #{itr.nombre}?" />
+		</p:commandButton>
+	</p:column>
+</p:dataTable>
+
+</ui:composition>

@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:form class="seccion_datos" id="seccion_datos" >
+	<p:growl id="growlPerfil" showDetail="true" style="z-index: 1;" />
+	<p:panelGrid columns="4" id="gridPrincipal"
+                 columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4"
+                 layout="grid"
+                 styleClass="ui-panelgrid-blank ui-fluid"
+                 style="border:0px none; background-color:transparent;">
+	<p:row styleClass="my-heading-row" style="font-size: 30px; white-space: nowrap;">Datos personales</p:row>
+	<h:outputLabel value="Nombre: " styleClass="text1"></h:outputLabel>
+	<h:outputLabel styleClass="text2">#{gestionPerfil.usuarioLogeado.nombre}</h:outputLabel>
+	
+	<h:outputLabel value="Apellido: " styleClass="text1"></h:outputLabel>
+	<h:outputLabel styleClass="text2">#{gestionPerfil.usuarioLogeado.apellido}</h:outputLabel>
+	
+	<h:outputLabel value="Documento: " styleClass="text1"></h:outputLabel>
+	<h:outputLabel styleClass="text2">#{gestionPerfil.usuarioLogeado.documento}</h:outputLabel>
+
+	<h:outputLabel value="Fecha de nacimiento: " styleClass="text1"></h:outputLabel>
+	<h:outputLabel styleClass="text2">#{gestionPerfil.convertirFechaNac(gestionPerfil.usuarioLogeado.fechaNacimiento)}</h:outputLabel>
+
+	<h:outputLabel value="Mail personal: " styleClass="text1"></h:outputLabel>
+	<h:outputLabel styleClass="text2">#{gestionPerfil.usuarioLogeado.mail}</h:outputLabel>
+
+	<h:outputLabel value="Teléfono: " styleClass="text1"></h:outputLabel>
+	<h:outputLabel styleClass="text2">#{gestionPerfil.usuarioLogeado.telefono}</h:outputLabel>
+
+	<h:outputLabel value="Genero: " styleClass="text1"></h:outputLabel>
+	<h:outputLabel styleClass="text2">#{gestionPerfil.primeraLetraMayuscula(gestionPerfil.usuarioLogeado.genero)}</h:outputLabel>
+	
+	<h:outputLabel value="Departamento: " styleClass="text1"></h:outputLabel>
+	<h:outputLabel styleClass="text2">#{gestionPerfil.usuarioLogeado.localidad.departamento.nombre}</h:outputLabel>
+	
+	<h:outputLabel value="Localidad: " styleClass="text1"></h:outputLabel>
+	<h:outputLabel styleClass="text2">#{gestionPerfil.usuarioLogeado.localidad.nombre}</h:outputLabel>
+		
+	<p:row styleClass="my-heading-row" style="font-size: 30px; white-space: nowrap;">Datos institucionales</p:row>
+	<h:outputLabel value="ITR: " styleClass="text1"></h:outputLabel>
+	<h:outputLabel styleClass="text2">#{gestionPerfil.usuarioLogeado.itr.nombre}</h:outputLabel>
+	
+	<h:outputLabel value="Mail institucional: " styleClass="text1"></h:outputLabel>
+	<h:outputLabel styleClass="text2">#{gestionPerfil.usuarioLogeado.mailInstitucional}</h:outputLabel>
+	
+	<h:outputLabel value="Area del tutor: " styleClass="text1" rendered="#{gestionPerfil.render.tutor}"></h:outputLabel>
+	<h:outputLabel styleClass="text2">#{gestionPerfil.tutorLogueado.area}</h:outputLabel>
+	
+	<h:outputLabel value="Rol del tutor: " styleClass="text1" rendered="#{gestionPerfil.render.tutor}"></h:outputLabel>
+	<h:outputLabel styleClass="text2">#{gestionPerfil.primeraLetraMayuscula(gestionPerfil.tutorLogueado.rolTutor)}</h:outputLabel>
+	
+	<h:outputLabel value="Año de ingreso: " styleClass="text1" rendered="#{gestionPerfil.render.estudiante}" ></h:outputLabel>
+	<h:outputLabel styleClass="text2">#{gestionPerfil.estudianteLogueado.añoIngreso}</h:outputLabel>
+	
+	<p:row>
+		<p:column styleClass="ui-grid-col-12">
+			<p:commandButton
+				value="Modificar datos propios"
+				icon="pi pi-cog"
+				style="width: auto; margin-right: 20px;"
+				styleClass="mr-2"
+				oncomplete="PF('dialogModificarPerfil').show()"/>
+				
+			<p:commandButton
+				value="Modificar contraseña"
+				icon="pi pi-lock"
+				style="width: auto"
+				styleClass="mr-2"
+				oncomplete="PF('dialogModificarContraseña').show()"/>
+		</p:column>
+	</p:row>
+	
+	</p:panelGrid>
+</h:form>
+	<h:form id="dialogs">
+		<ui:include src="/pages/components/perfil/DialogModificarPerfil.xhtml" />
+		<ui:include src="/pages/components/perfil/DialogModificarContraseña.xhtml" />
+	</h:form>
+	<style>
+		.bold-text {
+			font-weight: bold;
+		}
+		
+		.column1 {
+    		margin-right: 100px;
+		}
+		
+		.text1 {
+			margin-right: 20px;
+			font-weight: bold;
+			font-size: 18px;
+			white-space: nowrap;
+		}
+		.text2 {
+			margin-right: 20px; 
+			white-space: nowrap;
+			font-size: 18px;
+		}
+		
+        body .ui-panelgrid .ui-panelgrid-cell {
+            background-color: transparent;
+        }
+
+        .my-heading-row {
+            background-color: var(--surface-c);
+            font-weight: bold;
+        }
+    </style>
+</ui:composition>

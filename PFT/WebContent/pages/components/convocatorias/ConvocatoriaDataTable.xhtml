@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<p:dataTable
+	id="convocatoriaDataTable"
+	value="#{gestionConvocatoria.listaConvocatoria}"
+	widgetVar="lista_convocatorias"
+	emptyMessage="No se encontraron Convocatorias a Eventos"
+	globalFilterFunction="#{gestionConvocatoria.globalFilterFunctionJustificacion()}"
+	editable="true"
+	var="convocatoria"
+	class="my-table"
+	scrollable="true"
+	scrollHeight="800"
+	border="1">
+
+	<f:facet name="header">
+		<div class="flex justify-content-end" style="display:flex; justify-content: space-between;">
+			<p:inputText
+				id="globalFilter"
+				style="width:300px"
+				placeholder="Buscar Convocatoria" />
+			<p:commandButton
+				title="Actualizar"
+				icon="pi pi-refresh"
+				action="#{gestionConvocatoria.onRefresh()}"
+				styleClass="rounded-button ui-button-outlined"
+				update="@form"/>
+		</div>
+	</f:facet>
+
+	<p:column headerText="Estudiante" sortBy="#{convocatoria.estudiante.documento}" rendered="#{gestionConvocatoria.render.analista}">
+		<p:chip>
+			<h:outputText value="#{convocatoria.estudiante.documento}" />
+		</p:chip>
+	</p:column>
+	<p:column headerText="Evento">
+		<p:chip>
+			<h:outputText value="#{convocatoria.evento.titulo}" />
+		</p:chip>
+	</p:column>
+	<p:column headerText="Asistencia">
+		<h:outputText value="#{convocatoria.tipoAsistencia}" />
+	</p:column>
+	<p:column headerText="Calificacion">
+		<h:outputText value="#{convocatoria.calificacion}" />
+	</p:column>
+	
+	<p:column headerText="Reclamos" exportable="false" rendered="#{gestionConvocatoria.render.estudiante}">
+		<p:commandButton
+			title="Iniciar reclamo"
+			icon="pi pi-plus"
+			oncomplete="PF('dialogRegistrarReclamo').show()"
+			action="#{gestionConvocatoria.onClickReclamo(convocatoria)}"
+			styleClass="rounded-button ui-button-outlined"
+			style="margin-right: 5px;"
+			update=":dialogs:dialogRegistrarReclamoContent">
+		</p:commandButton>
+	</p:column>
+	
+	<p:column headerText="Justificaciones" exportable="false" rendered="#{gestionConvocatoria.render.estudiante}">
+		<p:commandButton
+			title="Enviar justificacion de inasistencia"
+			icon="pi pi-plus"
+			oncomplete="PF('dialogRegistrarJustificacion').show()"
+			action="#{gestionConvocatoria.onClickJustificacion(convocatoria)}"
+			styleClass="rounded-button ui-button-outlined"
+			style="margin-right: 5px;"
+			update=":dialogs:dialogRegistrarJustificacionContent">
+		</p:commandButton>
+	</p:column>
+</p:dataTable>
+
+</ui:composition>

@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/template.xhtml">
+
+<ui:define name="main_content">
+	<div class="main" style="z-index: 1;">
+		<h:form id="form" styleClass="seccion_lista_usuarios" style="font-size: 20px; color: white;">
+			<p:growl id="growlMessage" showDetail="true" style="z-index: 1;"> <p:autoUpdate></p:autoUpdate> </p:growl>
+			<h2>Generar reporte de reclamos</h2>
+			<div class="card">
+			    <div class="formgrid grid">
+			        <div class="field col">
+			            <label for="itr">ITR</label>
+			            <p:selectOneMenu 
+							id="itr"
+							styleClass="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+							value="#{gestionReporte.idItrSeleccionado}"
+							autoWidth="false">
+							<f:selectItem itemValue="#{-1}" itemLabel="ITR vacío" />
+							<f:selectItems
+								value="#{gestionReporte.cargarListaItr()}"
+								var="itr"
+								itemLabel="#{itr.nombre}"
+								itemValue="#{itr.idItr}"/>
+							<p:autoUpdate/>
+						</p:selectOneMenu>
+			        </div>
+			        <div class="field col">
+			            <label for="mes">Mes</label>
+			            <p:selectOneMenu 
+							id="mes"
+							styleClass="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+							value="#{gestionReporte.mesSeleccionado}"
+							autoWidth="false">
+							<f:selectItem itemValue="0" itemLabel="Mes vacío" />
+							<f:selectItem itemValue="1" itemLabel="Enero" />
+							<f:selectItem itemValue="2" itemLabel="Febrero" />
+							<f:selectItem itemValue="3" itemLabel="Marzo" />
+							<f:selectItem itemValue="4" itemLabel="Abril" />
+							<f:selectItem itemValue="5" itemLabel="Mayo" />
+							<f:selectItem itemValue="6" itemLabel="Junio" />
+							<f:selectItem itemValue="7" itemLabel="Julio" />
+							<f:selectItem itemValue="8" itemLabel="Agosto" />
+							<f:selectItem itemValue="9" itemLabel="Setiembre" />
+							<f:selectItem itemValue="10" itemLabel="Octubre" />
+							<f:selectItem itemValue="11" itemLabel="Noviembre" />
+							<f:selectItem itemValue="12" itemLabel="Diciembre" />
+							<p:autoUpdate/>
+						</p:selectOneMenu>
+			        </div>
+			    </div>
+			</div>
+			
+			<div class="card">
+			    <div class="formgrid grid">
+			        <div class="field col">
+			            <label for="generacion">Generación</label>
+			            <p:selectOneMenu 
+							id="generacion"
+							styleClass="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+							value="#{gestionReporte.generacionSeleccionada}"
+							filter="true"
+							filterMatchMode="startsWith"
+							autoWidth="false">
+							<f:selectItem itemValue="-1" itemLabel="Generación vacía" />
+							<f:selectItems
+								value="#{gestionUsuario.cargarListaAños()}"
+								var="año"
+								itemLabel="#{año}"
+								itemValue="#{año}"/>
+							<p:autoUpdate/>
+						</p:selectOneMenu>
+					</div>
+			        <div class="field col">
+			            <label for="tipo">Tipo de reclamo</label>
+			            <p:selectOneMenu
+							id="tipoReclamo"
+							styleClass="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+							value="#{gestionReporte.tipoReclamoSeleccionado}">
+							<f:selectItem itemValue="#{null}" itemLabel="Tipo de Reclamo vacío" />
+							<f:selectItem itemValue="EVENTO_VME" itemLabel="Evento VME" />
+							<f:selectItem itemValue="ACTIVIDAD_APE" itemLabel="Actividad APE" />
+						</p:selectOneMenu>
+			        </div>
+			    </div>
+			</div>
+			
+			<p:commandButton value="Generar reporte"> <p:fileDownload value="#{gestionReporte.reporteReclamo()}"/> </p:commandButton>
+			
+			<!-- <p:commandButton action="#{gestionReporte.onButton()}"> <p:fileDownload value="#{pdfUtil.generarPDF()}"/> </p:commandButton>
+			
+			<p:commandButton action="#{gestionReporte.prueba()}"></p:commandButton> -->
+		</h:form>
+	</div>
+</ui:define>
+</ui:composition>

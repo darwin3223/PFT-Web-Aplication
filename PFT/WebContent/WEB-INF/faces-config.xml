@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config
+	version="2.2"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+	
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+		<from-outcome>registro</from-outcome>
+			<to-view-id>/pages/registro.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+		<from-outcome>lostPassword</from-outcome>
+			<to-view-id>/pages/lostPassword.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+		<from-outcome>login</from-outcome>
+			<to-view-id>/pages/login.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+		<from-outcome>logout</from-outcome>
+			<to-view-id>/pages/login.xhtml</to-view-id>
+			<redirect/>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+		<from-outcome>perfilUsuario</from-outcome>
+			<to-view-id>/pages/app/PerfilUsuario.xhtml</to-view-id>
+			<redirect/>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+		<from-outcome>menuPrincipal</from-outcome>
+			<to-view-id>/pages/app/Welcome.xhtml</to-view-id>
+			<redirect/>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+		<from-outcome>listarJustificaciones</from-outcome>
+			<to-view-id>/pages/app/JustificacionListado.xhtml</to-view-id>
+			<redirect/>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+		<from-outcome>listarConvocatorias</from-outcome>
+			<to-view-id>/pages/app/ConvocatoriaListado.xhtml</to-view-id>
+			<redirect/>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+		<from-outcome>listarReclamos</from-outcome>
+			<to-view-id>/pages/app/ListadoReclamo.xhtml</to-view-id>
+			<redirect/>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+		<from-outcome>listarUsuarios</from-outcome>
+			<to-view-id>/pages/admin/UsuarioListado.xhtml</to-view-id>
+			<redirect/>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+		<from-outcome>listarItrs</from-outcome>
+			<to-view-id>/pages/admin/ListadoItrs.xhtml</to-view-id>
+			<redirect/>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+		<from-outcome>listarEstados</from-outcome>
+			<to-view-id>/pages/admin/ListadoEstados.xhtml</to-view-id>
+			<redirect/>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+		<from-outcome>reporteReclamos</from-outcome>
+			<to-view-id>/pages/admin/reportes/ReporteReclamos.xhtml</to-view-id>
+			<redirect/>
+		</navigation-case>
+	</navigation-rule>
+	
+	<application>
+	    <action-listener>
+	        org.primefaces.application.DialogActionListener
+	    </action-listener>
+	    <navigation-handler>
+	        org.primefaces.application.DialogNavigationHandler
+	    </navigation-handler>
+	    <view-handler>
+	        org.primefaces.application.DialogViewHandler
+	    </view-handler>
+	</application>
+</faces-config>

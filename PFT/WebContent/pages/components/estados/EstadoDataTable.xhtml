@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<p:dataTable
+	id="estadoDatatable"
+	value="#{gestionEstado.listaEstados}"
+	var="estado"
+	widgetVar="lista_estados_registrados"
+	emptyMessage="No se encontraron Estados"
+	globalFilterFunction="#{gestionEstado.globalFilterFunction}"
+	editable="true"
+	rowKey="#{estado.idEstado}"
+	class="my-table"
+	scrollable="true"
+	scrollHeight="800"
+	border="1">
+
+	<f:facet name="header">
+		<div class="flex justify-content-end" style="display:flex; justify-content: space-between;">
+			<p:inputText 
+				id="globalFilter"
+				onkeyup="PF('lista_estados_registrados').filter()"
+				style="width:300px"
+				placeholder="Buscar estado" />
+			<p:selectOneMenu
+				id="activoFilter"
+				value="#{gestionEstado.activoFilter}"
+				style="margin-left:30px;"
+				onchange="PF('lista_estados_registrados').filter()">
+				<f:selectItem itemValue="#{null}" itemLabel="Todos" />
+				<f:selectItem itemValue="ACTIVO" itemLabel="Activos" />
+				<f:selectItem itemValue="INACTIVO" itemLabel="Inactivos" />
+				<p:ajax listener="#{gestionEstado.refreshListaEstado(gestionEstado.activoFilter)}"></p:ajax>
+			</p:selectOneMenu>
+			<p:commandButton
+				title="Actualizar"
+				icon="pi pi-refresh"
+				action="#{gestionEstado.onRefresh()}"
+				style="margin-left:auto;"
+				styleClass="rounded-button ui-button-outlined"/>
+			<p:commandButton
+				icon="pi pi-plus"
+				value="Nuevo"
+				oncomplete="PF('dialogRegistrarEstado').show()"
+				styleClass="ui-button-outlined ui-button-success"
+				style="margin-left:30px; margin-right: .5rem;" />
+			<p:autoUpdate />
+		</div>
+	</f:facet>
+
+	<p:column headerText="Nombre" sortBy="#{estado.nombre}">
+		<h:outputText value="#{estado.nombre}"/>
+	</p:column>
+	<p:column headerText="Activo" sortBy="#{estado.activo}">
+		<p:tag 
+			severity="#{gestionEstado.getTagSeverity(estado.activo)}"
+			value="#{estado.activo}"/>
+	</p:column>
+	<p:column exportable="false" style="width:85px;">
+		<p:commandButton
+			icon="pi pi-pencil"
+			oncomplete="PF('dialogModificarEstado').show()"
+			update=":dialogs:dialogModificarEstadoContent"
+			action="#{gestionEstado.onSelectEstado(estado)}"
+			styleClass="rounded-button ui-button-outlined"
+			style="margin-right: 5px;">
+		</p:commandButton>
+		<p:commandButton
+			icon="pi pi-trash"
+			action="#{gestionEstado.onDelete(estado.idEstado)}"
+			styleClass="rounded-button ui-button-danger ui-button-outlined"
+			disabled="#{estado.activo == 'INACTIVO'}">
+			<p:confirm
+				icon="pi pi-info-circle"
+				header="Confirmación"
+				message="¿Deseas desactivar este estado?" />
+		</p:commandButton>
+	</p:column>
+</p:dataTable>
+
+</ui:composition>
